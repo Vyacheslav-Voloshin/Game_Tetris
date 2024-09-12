@@ -27,4 +27,25 @@ public class Field {
     public int[][] getMatrix() {
         return matrix;
     }
+
+    //об'єкт малюватиме на екран свій поточний стан
+    public void print(){
+
+    }
+
+    //буде видаляти з матриці повністю заповнені рядки і зрушувати рядки, які знаходяться вище рядка вниз
+    public void removeFullLines(){
+
+    }
+
+    //повертає значення, що знаходиться в матриці з координатами x і y
+    public Integer getValue(int x, int y){
+        return null;
+    }
+
+
+    //встановлює передане значення у комірку масиву (матриці) з координатами x, y
+    public void setValue(int x, int y, int value){
+
+    }
 }
