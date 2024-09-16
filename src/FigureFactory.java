@@ -33,9 +33,12 @@ public class FigureFactory {
             {0, 0, 0}}                          //
     };
 
-
+    /**
+     * Метод вибирає випадковий шаблон та створює з ним нову фігурку.
+     */
     public static Figure createRandomFigure(int x,int y){
-        return null;
+        int index =(int) (Math.random() *6);
+        return new Figure(x,y,BRICKS[index]);
     }
 }
 

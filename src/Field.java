@@ -4,9 +4,9 @@
  */
 public class Field {
 
-    private int width; //ширина
+    private int width; //ширина x
 
-    private int height;  //висота
+    private int height;  //висота y
 
     private int[][] matrix;
 
@@ -30,6 +30,16 @@ public class Field {
 
     //об'єкт малюватиме на екран свій поточний стан
     public void print(){
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (matrix[y][x] == 0){
+                    System.out.print(".");
+                } else {
+                    System.out.print("X");
+                }
+            }
+            System.out.println();
+        }
 
     }
 
