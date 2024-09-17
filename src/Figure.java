@@ -31,35 +31,94 @@ public class Figure {
         return matrix;
     }
 
-    //рух фігури вліво
-    public void left(){}
+    /**
+     * Рухаємо фігурку вліво.
+     * Перевіряємо, чи не вилізла вона за кордон поля і/або не залізла на зайняті клітини.
+     */
+    public void left(){
+        x--;
+        if(!isCurrentPositionAvailable()){
+            x++;
+        }
+    }
 
-    //рух фігури вправо
-    public void right(){}
+    /**
+     * Рухаємо фігурку вправо.
+     * Перевіряємо, чи не вилізла вона за кордон поля і/або не залізла на зайняті клітини.
+     */
+    public void right(){
+        x++;
+        if(!isCurrentPositionAvailable()){
+            x--;
+        }
+    }
 
-    //рух фігури вниз
-    public void down(){}
+    /**
+     * Рухаємо фігурку вниз.
+     * Використовується, якщо фігурка залізла на зайняті клітини.
+     */
+    public void down(){
+        y++;
+    }
 
-    //рух фігури вгору
-    public void up(){}
+    /**
+     * Рухаємо фігурку вгору.
+     * Використовується, якщо фігурка залізла на зайняті клітини.
+     */
+    public void up(){
+        y--;
+    }
 
     // поворот фігурки довкола головної діагоналі
     public void rotate(){}
 
-    //падіння фігурки вниз до дна
-    public void downMaximum(){}
+    /**
+     * Рухаємо фігурку вниз доти, поки не заліземо на когось.
+     */
+    public void downMaximum(){
+        while (isCurrentPositionAvailable()){
+            y++;
+        }
+        y--;
+    }
 
-    /*
-    перевірка - чи фігурка може бути поміщена в поточну позицію.
-    Для тесту захардкодь результат у true, поки ми не реалізували логіку
+    /**
+     * Перевіряємо - чи може фігурка знаходиться на поточній позиції:
+     * а) чи не виходить вона за межі поля
+     * б) чи не заходить вона на зайняті клітини
      */
     public boolean isCurrentPositionAvailable(){
+        Field field = Tetris.game.getField();
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (matrix[i][j] == 1) {
+                    if (y + i >= field.getHeight())
+                        return false;
+
+                    Integer value = field.getValue(x + j, y + i);
+                    if (value == null || value == 1)
+                        return false;
+                }
+            }
+        }
+
         return true;
     }
 
-    //викликається, коли фігурка досягла дна або вперлася в іншу фігурку
-    //Всі її зайняті клітини тепер мають додатись до Field.
-    public void landed(){}
+    /**
+     * Приземляємо фігурку - додаємо всі її непорожні клітини до клітин поля.
+     */
+    public void landed(){
+        Field field = Tetris.game.getField();
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (matrix[i][j] == 1)
+                    field.setValue(x + j, y + i, 1);
+            }
+        }
+    }
 
 }
 
